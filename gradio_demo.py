@@ -1,6 +1,7 @@
 import gradio as gr
 from gradio_rerun import Rerun
 
+
 import os
 import tempfile
 import numpy as np
@@ -13,6 +14,10 @@ from visualize import visualize_layout_with_rerun
 from spatiallm.pcd import load_o3d_pcd, get_points_and_colors, cleanup_pcd, Compose
 from spatiallm import Layout
 
+import gradio_client.utils as original_utils
+import custom_gradio_utils as custom_utils
+# Override the original function with the custom one
+original_utils.json_schema_to_python_type = custom_utils.json_schema_to_python_type
 
 model = None
 tokenizer = None
@@ -132,6 +137,16 @@ def gradio_interface():
                         minimum=100, maximum=8192, value=4096, step=100,
                         label="Max New Tokens"
                     )
+                    
+                    top_k = gr.Slider(
+                        minimum=1, maximum=100, value=10, step=1,
+                        label="Top-k Sampling"
+                    )
+                    top_p = gr.Slider(
+                        minimum=0.0, maximum=1.0, value=0.95, step=0.01,
+                        label="Top-p Sampling"
+                    )
+
                 
                 with gr.Accordion("Visualization Settings", open=False):
                     visualization_radius = gr.Slider(
@@ -183,4 +198,4 @@ def gradio_interface():
 
 if __name__ == "__main__":
     demo = gradio_interface()
-    demo.launch()
+    demo.launch(share=True)
