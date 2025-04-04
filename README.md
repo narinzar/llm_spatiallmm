@@ -77,6 +77,45 @@ poe install-torchsparse # Building wheel for torchsparse will take a while
 pip install gradio_rerun
 ```
 
+### NOTE ###
+# If You Do Not Have Conda Installed
+
+Follow these steps to install and initialize Miniconda on Linux.
+
+## Steps to Install and Initialize Conda
+
+### 1. Download the Miniconda Installer
+```bash
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+```
+
+### 2. Run the Installer
+```bash
+bash Miniconda3-latest-Linux-x86_64.sh
+```
+
+### 3. Add Miniconda to Your PATH
+```bash
+export PATH=~/miniconda3/bin:$PATH
+```
+
+### 4. Initialize Conda
+```bash
+conda init
+```
+
+### 5. Reload Your Shell Configuration
+```bash
+source ~/.bashrc
+```
+
+### 6. Verify Conda Installation
+```bash
+conda --version
+```
+
+After completing these steps, Conda should be successfully installed and ready to use.
+
 ### Inference
 
 In the current version of SpatialLM, input point clouds are considered axis-aligned where the z-axis is the up axis. This orientation is crucial for maintaining consistency in spatial understanding and scene interpretation across different datasets and applications.
